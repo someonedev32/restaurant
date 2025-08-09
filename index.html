@@ -1,181 +1,253 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Digjitale</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        header {
-            background: linear-gradient(135deg, #ff7b54, #ffb26b);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .container {
-            padding: 15px;
-            max-width: 500px;
-            margin: auto;
-        }
-        .form-card {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-        input, textarea, button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 8px;
-            margin-bottom: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1em;
-        }
-        button {
-            background: linear-gradient(135deg, #ff7b54, #ffb26b);
-            color: white;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        button:hover {
-            transform: scale(1.03);
-        }
-        .menu {
-            display: grid;
-            gap: 15px;
-        }
-        .menu-item {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-        }
-        .menu-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .menu-item-content {
-            padding: 12px;
-        }
-        .menu-item-title {
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-        .menu-item-price {
-            color: #ff7b54;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        .menu-item-desc {
-            font-size: 0.9em;
-            color: #666;
-        }
-        .qr-section {
-            text-align: center;
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin-top: 20px;
-        }
-        @media (max-width: 600px) {
-            .menu {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Digjitale me Porosi</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+    header {
+        background: linear-gradient(135deg, #ff7b54, #ffb26b);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .container {
+        padding: 15px;
+        max-width: 800px;
+        margin: auto;
+    }
+    .form-card, .order-card {
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+    }
+    input, textarea, button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1em;
+    }
+    button {
+        background: linear-gradient(135deg, #ff7b54, #ffb26b);
+        color: white;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+    button:hover {
+        transform: scale(1.03);
+    }
+    .menu {
+        display: grid;
+        gap: 15px;
+    }
+    .menu-item {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+    }
+    .menu-item img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+    .menu-item-content {
+        padding: 12px;
+    }
+    .menu-item-title {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 5px;
+    }
+    .menu-item-price {
+        color: #ff7b54;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .menu-item-desc {
+        font-size: 0.9em;
+        color: #666;
+    }
+    .order-list table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .order-list th, .order-list td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+    .order-total {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-top: 10px;
+        text-align: right;
+    }
+</style>
 </head>
 <body>
-    <header>🍽 Menu Digjitale</header>
+<header>🍽 Menu Digjitale</header>
 
-    <div class="container">
-        <div class="form-card">
-            <h3>Shto Artikull</h3>
-            <input type="text" id="itemName" placeholder="Emri i produktit" required>
-            <input type="number" id="itemPrice" placeholder="Çmimi (€)" required>
-            <textarea id="itemDesc" placeholder="Përshkrimi"></textarea>
-            <input type="text" id="itemImage" placeholder="Linku i fotos">
-            <button onclick="addItem()">Shto në Menu</button>
-        </div>
+<div class="container">
 
-        <div class="menu" id="menuList"></div>
-
-        <div class="qr-section">
-            <h3>📱 Skano për të parë menunë</h3>
-            <div id="qrcode"></div>
-        </div>
+    <!-- Form Shtimi Artikulli -->
+    <div class="form-card">
+        <h3>Shto Artikull</h3>
+        <input type="text" id="itemName" placeholder="Emri i produktit" required>
+        <input type="number" id="itemPrice" placeholder="Çmimi (€)" required>
+        <textarea id="itemDesc" placeholder="Përshkrimi"></textarea>
+        <input type="text" id="itemImage" placeholder="Linku i fotos">
+        <button onclick="addItem()">Shto në Menu</button>
     </div>
 
-    <!-- Libraria për QR Code -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Menu -->
+    <div class="menu" id="menuList"></div>
 
-    <script>
-        let menu = JSON.parse(localStorage.getItem("menu")) || [];
+    <!-- Porosia -->
+    <div class="order-card">
+        <h3>🛒 Porosia Ime</h3>
+        <div class="order-list" id="orderList"></div>
+        <div class="order-total" id="orderTotal"></div>
+        <button onclick="printOrder()">🖨 Printo Faturën</button>
+    </div>
 
-        function renderMenu() {
-            const menuList = document.getElementById("menuList");
-            menuList.innerHTML = "";
-            menu.forEach(item => {
-                menuList.innerHTML += `
-                    <div class="menu-item">
-                        <img src="${item.image || 'https://via.placeholder.com/300x180'}" alt="${item.name}">
-                        <div class="menu-item-content">
-                            <div class="menu-item-title">${item.name}</div>
-                            <div class="menu-item-price">${item.price} €</div>
-                            <div class="menu-item-desc">${item.desc}</div>
-                        </div>
+</div>
+
+<script>
+    let menu = JSON.parse(localStorage.getItem("menu")) || [];
+    let order = [];
+    const TVSH = 0.20; // 20% TVSH
+
+    function renderMenu() {
+        const menuList = document.getElementById("menuList");
+        menuList.innerHTML = "";
+        menu.forEach((item, index) => {
+            menuList.innerHTML += `
+                <div class="menu-item">
+                    <img src="${item.image || 'https://via.placeholder.com/300x180'}" alt="${item.name}">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">${item.name}</div>
+                        <div class="menu-item-price">${item.price} €</div>
+                        <div class="menu-item-desc">${item.desc}</div>
+                        <button onclick="addToOrder(${index})">Shto në Porosi</button>
                     </div>
-                `;
-            });
+                </div>
+            `;
+        });
+    }
+
+    function addItem() {
+        const name = document.getElementById("itemName").value.trim();
+        const price = document.getElementById("itemPrice").value.trim();
+        const desc = document.getElementById("itemDesc").value.trim();
+        const image = document.getElementById("itemImage").value.trim();
+
+        if (name && price) {
+            menu.push({ name, price: parseFloat(price), desc, image });
+            localStorage.setItem("menu", JSON.stringify(menu));
+            renderMenu();
+            document.getElementById("itemName").value = "";
+            document.getElementById("itemPrice").value = "";
+            document.getElementById("itemDesc").value = "";
+            document.getElementById("itemImage").value = "";
+        } else {
+            alert("Ju lutem plotësoni emrin dhe çmimin!");
         }
+    }
 
-        function addItem() {
-            const name = document.getElementById("itemName").value.trim();
-            const price = document.getElementById("itemPrice").value.trim();
-            const desc = document.getElementById("itemDesc").value.trim();
-            const image = document.getElementById("itemImage").value.trim();
-
-            if (name && price) {
-                menu.push({ name, price, desc, image });
-                localStorage.setItem("menu", JSON.stringify(menu));
-                renderMenu();
-                document.getElementById("itemName").value = "";
-                document.getElementById("itemPrice").value = "";
-                document.getElementById("itemDesc").value = "";
-                document.getElementById("itemImage").value = "";
-            } else {
-                alert("Ju lutem plotësoni emrin dhe çmimin!");
-            }
+    function addToOrder(index) {
+        const item = menu[index];
+        const existing = order.find(o => o.name === item.name);
+        if (existing) {
+            existing.qty++;
+        } else {
+            order.push({ name: item.name, price: item.price, qty: 1 });
         }
+        renderOrder();
+    }
 
-        function generateQRCode() {
-            const url = window.location.href; // Linku i faqes
-            new QRCode(document.getElementById("qrcode"), {
-                text: url,
-                width: 180,
-                height: 180
-            });
-        }
+    function renderOrder() {
+        let html = `<table>
+            <tr><th>Artikulli</th><th>Sasia</th><th>Çmimi</th><th>Totali</th></tr>`;
+        let subtotal = 0;
+        order.forEach(o => {
+            let totalItem = o.price * o.qty;
+            subtotal += totalItem;
+            html += `<tr>
+                <td>${o.name}</td>
+                <td>${o.qty}</td>
+                <td>${o.price.toFixed(2)} €</td>
+                <td>${totalItem.toFixed(2)} €</td>
+            </tr>`;
+        });
+        html += `</table>`;
+        const tvshValue = subtotal * TVSH;
+        const total = subtotal + tvshValue;
+        document.getElementById("orderList").innerHTML = html;
+        document.getElementById("orderTotal").innerHTML =
+            `Nëntotali: ${subtotal.toFixed(2)} € | TVSH (${(TVSH*100).toFixed(0)}%): ${tvshValue.toFixed(2)} € | Totali: ${total.toFixed(2)} €`;
+    }
 
-        renderMenu();
-        generateQRCode();
-    </script>
+    function printOrder() {
+        let printWindow = window.open('', '', 'width=800,height=600');
+        printWindow.document.write(`<html><head><title>Fatura</title>
+        <style>
+            body { font-family: Arial; padding: 20px; }
+            h2 { text-align: center; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+            .total { text-align: right; margin-top: 20px; font-weight: bold; }
+        </style>
+        </head><body>
+        <h2>Fatura</h2>
+        <table>
+            <tr><th>Artikulli</th><th>Sasia</th><th>Çmimi</th><th>Totali</th></tr>
+        `);
+        let subtotal = 0;
+        order.forEach(o => {
+            let totalItem = o.price * o.qty;
+            subtotal += totalItem;
+            printWindow.document.write(`
+                <tr>
+                    <td>${o.name}</td>
+                    <td>${o.qty}</td>
+                    <td>${o.price.toFixed(2)} €</td>
+                    <td>${totalItem.toFixed(2)} €</td>
+                </tr>
+            `);
+        });
+        const tvshValue = subtotal * TVSH;
+        const total = subtotal + tvshValue;
+        printWindow.document.write(`</table>
+            <div class="total">Nëntotali: ${subtotal.toFixed(2)} €</div>
+            <div class="total">TVSH (${(TVSH*100).toFixed(0)}%): ${tvshValue.toFixed(2)} €</div>
+            <div class="total">Totali: ${total.toFixed(2)} €</div>
+        </body></html>`);
+        printWindow.document.close();
+        printWindow.print();
+    }
+
+    renderMenu();
+    renderOrder();
+</script>
 </body>
 </html>
