@@ -87,6 +87,14 @@
             font-size: 0.9em;
             color: #666;
         }
+        .qr-section {
+            text-align: center;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
         @media (max-width: 600px) {
             .menu {
                 grid-template-columns: 1fr;
@@ -108,7 +116,15 @@
         </div>
 
         <div class="menu" id="menuList"></div>
+
+        <div class="qr-section">
+            <h3>📱 Skano për të parë menunë</h3>
+            <div id="qrcode"></div>
+        </div>
     </div>
+
+    <!-- Libraria për QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <script>
         let menu = JSON.parse(localStorage.getItem("menu")) || [];
@@ -149,7 +165,17 @@
             }
         }
 
+        function generateQRCode() {
+            const url = window.location.href; // Linku i faqes
+            new QRCode(document.getElementById("qrcode"), {
+                text: url,
+                width: 180,
+                height: 180
+            });
+        }
+
         renderMenu();
+        generateQRCode();
     </script>
 </body>
 </html>
