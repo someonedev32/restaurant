@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Digjitale</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #ff7b54, #ffb26b);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .container {
+            padding: 15px;
+            max-width: 500px;
+            margin: auto;
+        }
+        .form-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        button {
+            background: linear-gradient(135deg, #ff7b54, #ffb26b);
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        button:hover {
+            transform: scale(1.03);
+        }
+        .menu {
+            display: grid;
+            gap: 15px;
+        }
+        .menu-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .menu-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .menu-item-content {
+            padding: 12px;
+        }
+        .menu-item-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        .menu-item-price {
+            color: #ff7b54;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .menu-item-desc {
+            font-size: 0.9em;
+            color: #666;
+        }
+        @media (max-width: 600px) {
+            .menu {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>🍽 Menu Digjitale</header>
+
+    <div class="container">
+        <div class="form-card">
+            <h3>Shto Artikull</h3>
+            <input type="text" id="itemName" placeholder="Emri i produktit" required>
+            <input type="number" id="itemPrice" placeholder="Çmimi (€)" required>
+            <textarea id="itemDesc" placeholder="Përshkrimi"></textarea>
+            <input type="text" id="itemImage" placeholder="Linku i fotos">
+            <button onclick="addItem()">Shto në Menu</button>
+        </div>
+
+        <div class="menu" id="menuList"></div>
+    </div>
+
+    <script>
+        let menu = JSON.parse(localStorage.getItem("menu")) || [];
+
+        function renderMenu() {
+            const menuList = document.getElementById("menuList");
+            menuList.innerHTML = "";
+            menu.forEach(item => {
+                menuList.innerHTML += `
+                    <div class="menu-item">
+                        <img src="${item.image || 'https://via.placeholder.com/300x180'}" alt="${item.name}">
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">${item.name}</div>
+                            <div class="menu-item-price">${item.price} €</div>
+                            <div class="menu-item-desc">${item.desc}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function addItem() {
+            const name = document.getElementById("itemName").value.trim();
+            const price = document.getElementById("itemPrice").value.trim();
+            const desc = document.getElementById("itemDesc").value.trim();
+            const image = document.getElementById("itemImage").value.trim();
+
+            if (name && price) {
+                menu.push({ name, price, desc, image });
+                localStorage.setItem("menu", JSON.stringify(menu));
+                renderMenu();
+                document.getElementById("itemName").value = "";
+                document.getElementById("itemPrice").value = "";
+                document.getElementById("itemDesc").value = "";
+                document.getElementById("itemImage").value = "";
+            } else {
+                alert("Ju lutem plotësoni emrin dhe çmimin!");
+            }
+        }
+
+        renderMenu();
+    </script>
+</body>
+</html>
